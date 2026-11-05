@@ -1,6 +1,7 @@
 import express from 'express';
 
 import { config } from './config.js';
+import { startKeepAwakeJob } from './jobs/keepAwake.job.js';
 import { startWarmUpJob } from './jobs/warmUp.job.js';
 import { analysisRouter } from './routes/analysis.routes.js';
 
@@ -17,4 +18,5 @@ app.use('/api/analysis', analysisRouter);
 app.listen(config.port, () => {
   console.log(`Server running on http://localhost:${config.port}`);
   startWarmUpJob();
+  startKeepAwakeJob();
 });

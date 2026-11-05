@@ -1,0 +1,19 @@
+# Render deploy settings for the AI analysis server.
+# Render reads this file when you create a "Blueprint" from this repo.
+# API keys are NOT stored here: Render asks for them in its dashboard.
+services:
+  - type: web
+    name: ai-finance-server
+    runtime: node
+    plan: free
+    rootDir: server
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: ALPHA_VANTAGE_API_KEY
+        sync: false # you type the value in the Render dashboard
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODELS
+        value: gemini-flash-latest,gemini-3.5-flash,gemini-flash-lite-latest

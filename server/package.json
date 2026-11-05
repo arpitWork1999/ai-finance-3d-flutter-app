@@ -4,6 +4,9 @@
   "description": "Backend for AI stock analysis (Alpha Vantage + Google Gemini)",
   "type": "module",
   "main": "src/index.js",
+  "engines": {
+    "node": ">=20.11"
+  },
   "scripts": {
     "start": "node src/index.js",
     "dev": "node --watch src/index.js"

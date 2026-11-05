@@ -31,6 +31,7 @@ src/
   config.js                    reads .env
   routes/analysis.routes.js    GET /api/analysis/:symbol
   jobs/warmUp.job.js           prepares all analyses in advance
+  jobs/keepAwake.job.js        keeps the server awake on Render
   services/analysis.service.js       builds + caches one analysis
   services/alphaVantage.service.js   historical daily prices
   services/gemini.service.js         AI analysis
