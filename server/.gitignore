@@ -1,0 +1,10 @@
+node_modules/
+npm-debug.log*
+
+# Secrets: copy .env.example to .env and add your own keys.
+.env
+.env.*
+!.env.example
+
+# Saved AI analysis responses (created at runtime)
+cache/
