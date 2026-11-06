@@ -9,7 +9,7 @@ export const config = {
   // Stocks shown in the app. Their analysis is prepared in advance.
   trackedStocks: ['NVDA', 'MSFT', 'AAPL', 'AMZN', 'TSLA'],
 
-  alphaVantageApiKey: process.env.ALPHA_VANTAGE_API_KEY,
+  twelveDataApiKey: process.env.TWELVE_DATA_API_KEY,
   geminiApiKey: process.env.GEMINI_API_KEY,
   // Tried in order: if one model is busy, the next one is used.
   geminiModels: (

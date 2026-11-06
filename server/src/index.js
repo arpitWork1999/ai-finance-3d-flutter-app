@@ -5,7 +5,7 @@ import { startKeepAwakeJob } from './jobs/keepAwake.job.js';
 import { startWarmUpJob } from './jobs/warmUp.job.js';
 import { analysisRouter } from './routes/analysis.routes.js';
 
-if (!config.alphaVantageApiKey || !config.geminiApiKey) {
+if (!config.twelveDataApiKey || !config.geminiApiKey) {
   console.error('Missing API keys. Add them to server/.env (see .env.example)');
   process.exit(1);
 }

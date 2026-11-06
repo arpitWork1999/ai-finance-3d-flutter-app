@@ -57,7 +57,7 @@ The same camera is used for both views: **top view** circles around the home, an
 |------|------|
 | App | Flutter, GetX (state, routes, bindings) |
 | Stock prices | [Finnhub](https://finnhub.io) REST + WebSocket |
-| AI analysis | Node.js (Express) server, [Alpha Vantage](https://www.alphavantage.co) data, [Google Gemini](https://aistudio.google.com) |
+| AI analysis | Node.js (Express) server, [Twelve Data](https://twelvedata.com) data, [Google Gemini](https://aistudio.google.com) |
 | Charts | fl_chart |
 | Network status | connectivity_plus |
 | Config | flutter_dotenv (`.env` file) |
@@ -87,7 +87,7 @@ lib/
 server/            Node.js server for the AI analysis
   src/
     routes/        /api/analysis/:symbol
-    services/      Alpha Vantage, Gemini, analysis
+    services/      Twelve Data, Gemini, analysis
     utils/         indicators and daily cache
 ```
 
@@ -116,7 +116,7 @@ npm install
 npm start
 ```
 
-Add your Alpha Vantage and Gemini keys to `server/.env`. The server runs on port `3000`.
+Add your Twelve Data and Gemini keys to `server/.env`. The server runs on port `3000`.
 
 ### 3. Run the app
 
@@ -133,7 +133,7 @@ The repo has a `render.yaml`, so Render sets up the server for you.
 
 1. Push this repo to GitHub.
 2. On [render.com](https://render.com), go to **New → Blueprint** and pick this repo.
-3. Enter your `ALPHA_VANTAGE_API_KEY` and `GEMINI_API_KEY` when asked, then deploy.
+3. Enter your `TWELVE_DATA_API_KEY` and `GEMINI_API_KEY` when asked, then deploy.
 4. Open `https://<your-service>.onrender.com/health`. It should show `{"status":"ok"}`.
 5. In the app's `.env`, set:
    ```

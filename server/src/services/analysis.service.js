@@ -1,4 +1,4 @@
-import { getDailyHistory } from './alphaVantage.service.js';
+import { getDailyHistory } from './twelveData.service.js';
 import { generateStockAnalysis } from './gemini.service.js';
 import { calculateIndicators } from '../utils/indicators.js';
 import { readCache, writeCache } from '../utils/cache.js';
@@ -41,7 +41,7 @@ async function buildAnalysis(symbol) {
     priceHistory: history.map((day) => ({ date: day.date, close: day.close })),
     analysis,
     sources: {
-      historicalData: 'Alpha Vantage',
+      historicalData: 'Twelve Data',
       analysis: 'Google Gemini',
     },
     disclaimer:

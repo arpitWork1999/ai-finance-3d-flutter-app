@@ -3,7 +3,7 @@ import path from 'node:path';
 
 /// Very small file cache that keeps data for one day.
 ///
-/// Alpha Vantage free plan allows only 25 requests per day, so we save
+/// Stock data and AI analysis only change once a day, so we save
 /// each response in server/cache/<name>-<date>.json and reuse it.
 /// Files survive server restarts. Files from older days are deleted.
 

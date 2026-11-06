@@ -47,7 +47,7 @@ class AppStrings {
   static String bulletPoint(String text) => '•  $text';
   static String dataSources(String disclaimer, String dataAsOf) =>
       '$disclaimer\n'
-      'Historical data: Alpha Vantage (as of $dataAsOf) · '
+      'Historical data: Twelve Data (as of $dataAsOf) · '
       'Analysis: Google Gemini';
 
   // Indicator names
