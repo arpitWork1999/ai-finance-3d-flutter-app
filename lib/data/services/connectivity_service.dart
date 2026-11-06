@@ -5,18 +5,13 @@ import 'package:get/get.dart';
 
 import '../../core/widgets/no_internet_dialog.dart';
 
-/// Watches Wi-Fi / mobile data for the whole app.
-///
-/// - Goes offline -> shows the "You're offline" dialog.
-/// - Back online  -> closes the dialog. Screens listen to [isOnline]
-///   and load their data again.
 class ConnectivityService extends GetxService {
   final Connectivity _connectivity = Connectivity();
   StreamSubscription<List<ConnectivityResult>>? _subscription;
 
   final RxBool isOnline = true.obs;
 
-  // onReady runs after the first frame, so the dialog can be shown.
+  // onReady, not onInit: the dialog needs the first frame
   @override
   void onReady() {
     super.onReady();
@@ -34,7 +29,6 @@ class ConnectivityService extends GetxService {
     _onChanged(await _connectivity.checkConnectivity());
   }
 
-  /// Online means at least one network (Wi-Fi, mobile data, ...) is on.
   void _onChanged(List<ConnectivityResult> results) {
     final hasNetwork = results.any(
       (result) => result != ConnectivityResult.none,

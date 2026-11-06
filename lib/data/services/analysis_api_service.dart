@@ -6,9 +6,8 @@ import '../../core/constants/api_constants.dart';
 import '../models/stock_analysis.dart';
 import '../../core/constants/app_strings.dart';
 
-/// Calls our Node server (server/ folder) for the AI analysis.
 class AnalysisApiService {
-  // Gemini can take a while, and the server may try several models.
+  // Gemini can be slow and the server may try more than one model
   static const Duration _timeout = Duration(seconds: 150);
 
   Future<StockAnalysis> getAnalysis(String symbol) async {

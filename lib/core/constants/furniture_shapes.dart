@@ -3,7 +3,7 @@ import 'app_colors.dart';
 
 /// The 3D shape of every furniture item, built from simple boxes.
 ///
-/// Sizes are in meters. dz < 0 is towards North, dx > 0 is towards East.
+// sizes in meters, -dz is North and +dx is East
 class FurnitureShapes {
   static const List<FurniturePart> poojaMandir = [
     // Base cabinet
@@ -60,7 +60,7 @@ class FurnitureShapes {
     ),
   ];
 
-  /// The chair is on the West side, so the student faces East.
+  // chair on the West side so you face East while studying
   static const List<FurniturePart> studyTable = [
     // Table top
     FurniturePart(
@@ -173,7 +173,7 @@ class FurnitureShapes {
     ),
   ];
 
-  /// The door is on the North side, so the locker opens towards North.
+  // door on the North side so the locker opens to the North
   static const List<FurniturePart> cashLocker = [
     // Body
     FurniturePart(width: 0.8, depth: 0.7, height: 1.3, color: AppColors.steel),
@@ -198,7 +198,7 @@ class FurnitureShapes {
     ),
   ];
 
-  /// The headboard is on the South side, so you sleep with head to South.
+  // headboard on the South side, head to the South while sleeping
   static const List<FurniturePart> masterBed = [
     // Frame
     FurniturePart(width: 1.9, depth: 2.1, height: 0.35, color: AppColors.wood),

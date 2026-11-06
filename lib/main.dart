@@ -11,7 +11,6 @@ import 'data/services/connectivity_service.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Load API keys from the .env file before the app starts.
   await dotenv.load(fileName: '.env', isOptional: true);
 
   runApp(const AiFinanceApp());
@@ -26,7 +25,6 @@ class AiFinanceApp extends StatelessWidget {
       title: AppStrings.appName,
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      // Created once for the whole app: watches Wi-Fi / mobile data.
       initialBinding: BindingsBuilder(() {
         Get.put(ConnectivityService(), permanent: true);
       }),

@@ -5,11 +5,6 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 
 import '../../core/constants/api_constants.dart';
 
-/// Live trade prices from the Finnhub WebSocket.
-///
-/// Finnhub sends messages like:
-/// {"type":"trade","data":[{"s":"AAPL","p":349.51,"t":1793878092287,"v":100}]}
-/// The app connects only during regular US market hours.
 class StockSocketService {
   WebSocketChannel? _channel;
   StreamSubscription? _subscription;
@@ -44,11 +39,10 @@ class StockSocketService {
   ) {
     final json = jsonDecode(message as String) as Map<String, dynamic>;
 
-    // Finnhub also sends {"type":"ping"} messages, which we skip.
+    // Finnhub also sends pings, skip those
     if (json['type'] != 'trade') return;
 
-    // One message can hold many trades. We only need the
-    // latest one of each stock, so later trades overwrite earlier ones.
+    // one message can carry several trades, we only need the latest per symbol
     final latestTrades = <String, Map<String, dynamic>>{};
     for (final trade in json['data'] as List) {
       latestTrades[trade['s'] as String] = trade as Map<String, dynamic>;
@@ -64,8 +58,7 @@ class StockSocketService {
   }
 
   void disconnect() {
-    // Cancel the listener first so onDisconnected is not called
-    // when we close the socket on purpose.
+    // cancel first so onDisconnected doesn't fire when we close on purpose
     _subscription?.cancel();
     _subscription = null;
     _channel?.sink.close();

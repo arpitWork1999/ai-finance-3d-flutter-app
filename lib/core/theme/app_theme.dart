@@ -2,20 +2,16 @@ import 'package:flutter/material.dart';
 
 import '../constants/app_colors.dart';
 
-/// One place for the look of the whole app.
-/// Screens only use the default widgets; this theme styles them.
 class AppTheme {
   static const Color primaryColor = AppColors.primary;
   static const double cornerRadius = 16;
   static const double buttonRadius = 12;
 
-  /// No press effect: no ripple and no grey highlight.
   static final ButtonStyle _noPressEffect = ButtonStyle(
     splashFactory: NoSplash.splashFactory,
     overlayColor: WidgetStateProperty.all(AppColors.transparent),
   );
 
-  /// Buttons: no press effect, rounded corners, comfortable height.
   static final ButtonStyle _buttonStyle = _noPressEffect.copyWith(
     minimumSize: WidgetStateProperty.all(const Size(0, 48)),
     shape: WidgetStateProperty.all(
@@ -26,10 +22,9 @@ class AppTheme {
     ),
   );
 
-  /// A getter (not a field), so hot reload picks up theme changes.
+  // getter, not a field, so hot reload picks up theme changes
   static ThemeData get lightTheme => ThemeData(
-    // fromSeed makes the color a bit dull, so we set the exact accent
-    // color for buttons, icons and selected items.
+    // fromSeed dulls the accent a bit, so set it explicitly
     colorScheme: ColorScheme.fromSeed(
       seedColor: primaryColor,
       primary: AppColors.primary,
@@ -43,12 +38,10 @@ class AppTheme {
     primaryColor: AppColors.primary,
     scaffoldBackgroundColor: AppColors.background,
 
-    // No ripple or highlight when tapping cards, chips and list items.
     splashFactory: NoSplash.splashFactory,
     splashColor: AppColors.transparent,
     highlightColor: AppColors.transparent,
 
-    // App bar: same color as the page, bold title, no change on scroll.
     appBarTheme: const AppBarTheme(
       centerTitle: true,
       backgroundColor: AppColors.background,
@@ -62,7 +55,6 @@ class AppTheme {
       ),
     ),
 
-    // Cards: flat white with a thin border instead of a shadow.
     cardTheme: CardThemeData(
       color: AppColors.surface,
       elevation: 0,
@@ -73,7 +65,6 @@ class AppTheme {
       ),
     ),
 
-    // Chips: white pills with a thin border.
     chipTheme: ChipThemeData(
       backgroundColor: AppColors.surface,
       selectedColor: AppColors.primaryLight,
@@ -83,7 +74,6 @@ class AppTheme {
 
     dividerTheme: const DividerThemeData(color: AppColors.border),
 
-    // Bottom bar: white, with a light highlight on the selected tab.
     navigationBarTheme: NavigationBarThemeData(
       backgroundColor: AppColors.surface,
       surfaceTintColor: AppColors.transparent,
@@ -91,7 +81,6 @@ class AppTheme {
       overlayColor: WidgetStateProperty.all(AppColors.transparent),
     ),
 
-    // Buttons
     filledButtonTheme: FilledButtonThemeData(style: _buttonStyle),
     outlinedButtonTheme: OutlinedButtonThemeData(style: _buttonStyle),
     textButtonTheme: TextButtonThemeData(style: _noPressEffect),

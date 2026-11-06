@@ -1,9 +1,5 @@
 import 'point_3d.dart';
 
-/// One flat side of a 3D shape (4 corners).
-///
-/// [normal] is the direction the face looks at.
-/// Example: the top of a box has normal (0, 1, 0) = up.
 class Face3D {
   final List<Point3D> corners;
   final Point3D normal;
@@ -20,10 +16,7 @@ class Face3D {
     return Point3D(x / corners.length, y / corners.length, z / corners.length);
   }
 
-  /// Builds the 5 visible faces of a box (top + 4 sides).
-  /// The bottom is skipped because it sits on the floor.
-  ///
-  /// [base] is the center of the box bottom.
+  // top + 4 sides, the bottom sits on the floor so we skip it
   static List<Face3D> box({
     required Point3D base,
     required double width,

@@ -5,7 +5,6 @@ import '../vastu_controller.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_strings.dart';
 
-/// Shows why the selected item belongs in its Vastu zone.
 class ItemInfoCard extends GetView<VastuController> {
   const ItemInfoCard({super.key});
 

@@ -63,7 +63,6 @@ class VastuView extends GetView<VastuController> {
     );
   }
 
-  /// Short dark flash when the camera jumps to another place.
   Widget _fadeOverlay() {
     return IgnorePointer(
       child: Obx(

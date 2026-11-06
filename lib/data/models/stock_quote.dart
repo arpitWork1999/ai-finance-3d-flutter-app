@@ -1,4 +1,3 @@
-/// Price details of one stock.
 class StockQuote {
   final String symbol;
   final String companyName;
@@ -26,8 +25,6 @@ class StockQuote {
 
   bool get isPositive => change >= 0;
 
-  /// Builds a quote from the Finnhub /quote response.
-  /// Example: {"c":349.51,"d":17.61,"dp":5.30,"h":354.5,"l":340.99,"o":341.56,"pc":331.9,"t":1793826000}
   factory StockQuote.fromJson({
     required String symbol,
     required String companyName,
@@ -49,8 +46,7 @@ class StockQuote {
     );
   }
 
-  /// Returns a new quote with the latest live trade price.
-  /// Change is always measured against the previous day's close.
+  // change is always measured from the previous close
   StockQuote updatePrice(double newPrice, DateTime tradeTime) {
     final newChange = newPrice - previousClose;
     return StockQuote(

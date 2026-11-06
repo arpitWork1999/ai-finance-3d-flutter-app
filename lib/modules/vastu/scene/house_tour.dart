@@ -3,10 +3,6 @@ import 'dart:math';
 import '../../../data/models/vastu_zone.dart';
 import 'point_3d.dart';
 
-/// One stop of the walkthrough.
-///
-/// The camera walks along [walkPath] (through doorways, around furniture)
-/// and then stops at the last point to look at the item of [zone].
 class TourStop {
   final VastuZone zone;
   final List<Point3D> walkPath;
@@ -16,12 +12,8 @@ class TourStop {
   Point3D get standPoint => walkPath.last;
 }
 
-/// The route a visitor walks through the home, like a real estate tour.
-///
-/// Points are on the floor (y = 0); the camera adds eye height.
-/// The route follows the Vastu layout, so it is used after "Apply Vastu".
+// points are on the floor, the camera adds eye height
 class HouseTour {
-  /// The visitor starts on the street, North of the gate, facing the home.
   static const Point3D startPoint = Point3D(0, 0, -11.5);
   static const double startYaw = pi; // facing South
 
@@ -89,7 +81,6 @@ class HouseTour {
     ),
   ];
 
-  /// After the last room, walk back to the open central hall (Brahmasthan).
   static const List<Point3D> endPath = [
     Point3D(-2.0, 0, -0.8),
     Point3D(-1.3, 0, 0),

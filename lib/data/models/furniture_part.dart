@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// One box of a furniture item, e.g. a table leg or a pillow.
-///
-/// [dx] and [dz] move the part from the item center (in meters).
-/// [bottom] is how high above the floor the part starts.
 class FurniturePart {
   final double dx;
   final double dz;

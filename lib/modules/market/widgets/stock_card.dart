@@ -6,8 +6,6 @@ import '../../../routes/app_routes.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_strings.dart';
 
-/// Shows one stock: name, live price, today's change and day stats.
-/// Tap it to open the AI analysis.
 class StockCard extends StatelessWidget {
   final StockQuote stock;
 

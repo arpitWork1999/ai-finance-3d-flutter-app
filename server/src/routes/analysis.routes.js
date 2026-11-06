@@ -4,9 +4,7 @@ import { getStockAnalysis } from '../services/analysis.service.js';
 
 export const analysisRouter = Router();
 
-/// GET /api/analysis/AAPL
-/// Returns indicators, price history (for the chart) and the AI analysis.
-/// Usually served from cache, because the warm-up job prepares it in advance.
+// GET /api/analysis/AAPL
 analysisRouter.get('/:symbol', async (req, res) => {
   const symbol = req.params.symbol.toUpperCase();
 

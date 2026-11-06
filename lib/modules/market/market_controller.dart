@@ -10,12 +10,6 @@ import '../../data/services/connectivity_service.dart';
 import '../../data/services/stock_socket_service.dart';
 import '../../core/constants/app_strings.dart';
 
-/// Loads the stock prices and keeps them updated in real time.
-///
-/// 1. REST API  -> loads all stocks once (price, high, low, previous close).
-/// 2. WebSocket -> pushes every new trade price, only during regular
-///    market hours (9:30 AM - 4:00 PM New York time). Pre-market and
-///    after-hours trades are not shown.
 class MarketController extends GetxController {
   final StockApiService _apiService;
   final StockSocketService _socketService;
@@ -38,7 +32,7 @@ class MarketController extends GetxController {
   static const Duration _reconnectDelay = Duration(seconds: 5);
   static const Duration _marketStatusInterval = Duration(minutes: 1);
 
-  /// Keeps the loader visible a moment so a fast failure doesn't blink.
+  // so a fast failure doesn't make the screen blink
   static const Duration _minLoaderTime = Duration(milliseconds: 800);
 
   @override
@@ -46,14 +40,12 @@ class MarketController extends GetxController {
     super.onInit();
     loadStocks();
 
-    // Back online after being offline -> load the latest prices again.
     _onlineWorker = ever(Get.find<ConnectivityService>().isOnline, (
       bool isOnline,
     ) {
       if (isOnline) {
         loadStocks();
       } else {
-        // Live updates can't arrive while offline.
         isLiveConnected.value = false;
       }
     });
@@ -72,8 +64,6 @@ class MarketController extends GetxController {
     super.onClose();
   }
 
-  /// Loads the latest quotes and starts live updates.
-  /// Also used by pull-to-refresh.
   Future<void> loadStocks() async {
     if (ApiConstants.apiKey.isEmpty) {
       errorMessage.value = AppStrings.apiKeyMissing;
@@ -82,7 +72,7 @@ class MarketController extends GetxController {
 
     isLoading.value = stocks.isEmpty;
     errorMessage.value = '';
-    // Only wait when the full-screen loader is showing (not on pull-to-refresh).
+    // no need to hold the loader on pull-to-refresh
     final minLoader = isLoading.value
         ? Future.delayed(_minLoaderTime)
         : Future.value();
@@ -100,8 +90,6 @@ class MarketController extends GetxController {
     }
   }
 
-  /// Checks every minute if the market opened or closed.
-  /// When it changes, reload the quotes and start/stop live updates.
   Future<void> _checkMarketStatus() async {
     if (stocks.isEmpty) return;
 
@@ -111,11 +99,10 @@ class MarketController extends GetxController {
         await loadStocks();
       }
     } catch (_) {
-      // Ignore, we try again in a minute.
+      // ignore, we check again in a minute
     }
   }
 
-  /// Live updates run only while the regular market is open.
   void _updateLiveConnection() {
     if (isMarketOpen.value) {
       _connectLiveUpdates();
@@ -145,11 +132,10 @@ class MarketController extends GetxController {
     final index = stocks.indexWhere((stock) => stock.symbol == symbol);
     if (index == -1) return;
 
-    // Replacing the item tells the UI (Obx) to rebuild.
+    // replacing the item is what makes Obx rebuild
     stocks[index] = stocks[index].updatePrice(price, time);
   }
 
-  /// Tries to connect again after a short delay if the connection drops.
   void _onLiveDisconnected() {
     isLiveConnected.value = false;
     _reconnectTimer?.cancel();

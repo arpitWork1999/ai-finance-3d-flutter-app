@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:ai_finance_app/core/constants/app_strings.dart';
 import 'package:ai_finance_app/main.dart';
 
 void main() {
-  // Tests run without env.json, so the Market tab shows the
-  // "API key missing" message instead of calling the real API.
+  // no .env in tests, so the Market tab shows 'API key missing' instead of calling the API
   testWidgets('Dashboard switches between Market and Vastu tabs', (
     WidgetTester tester,
   ) async {
@@ -17,9 +17,12 @@ void main() {
     await tester.tap(find.byIcon(Icons.home_outlined));
     await tester.pumpAndSettle();
 
-    expect(
-      find.text('3D interior placement as per Vastu - coming soon'),
-      findsOneWidget,
-    );
+    expect(find.text(AppStrings.vastuTitle).hitTestable(), findsOneWidget);
+    expect(find.text(AppStrings.beforeVastu).hitTestable(), findsOneWidget);
+
+    await tester.tap(find.text(AppStrings.applyVastu));
+    await tester.pumpAndSettle();
+
+    expect(find.text(AppStrings.vastuApplied).hitTestable(), findsOneWidget);
   });
 }

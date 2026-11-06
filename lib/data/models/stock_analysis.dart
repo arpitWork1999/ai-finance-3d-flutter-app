@@ -1,4 +1,3 @@
-/// AI analysis of one stock, returned by our Node server.
 class StockAnalysis {
   final String symbol;
   final String dataAsOf;
@@ -46,7 +45,6 @@ class StockAnalysis {
   }
 }
 
-/// Numbers calculated by the server from the last 100 trading days.
 class StockIndicators {
   final double? sma20;
   final double? sma50;
@@ -87,7 +85,6 @@ class StockIndicators {
   }
 }
 
-/// One day's closing price, used for the chart.
 class PricePoint {
   final String date;
   final double close;

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../../../data/models/stock_analysis.dart';
 import '../../../core/constants/app_colors.dart';
 
-/// Line chart of the daily closing prices.
 class PriceHistoryChart extends StatelessWidget {
   final List<PricePoint> priceHistory;
   final String trend;

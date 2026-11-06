@@ -4,14 +4,9 @@ import {
   hasCachedAnalysis,
 } from '../services/analysis.service.js';
 
-/// Prepares the analysis of every tracked stock before users ask for it,
-/// so tapping "View AI analysis" in the app opens instantly.
-///
-/// Runs when the server starts, then checks every 30 minutes.
-/// A stock is only analysed if today's cache is missing, so this
-/// covers both the new day and retrying when Gemini was busy.
+// only stocks without today's cache, so this also retries after Gemini was busy
 
-const CHECK_INTERVAL = 30 * 60 * 1000; // 30 minutes
+const CHECK_INTERVAL = 30 * 60 * 1000;
 let isRunning = false;
 
 export function startWarmUpJob() {
@@ -28,7 +23,7 @@ async function warmUpMissingAnalyses() {
     console.log(`Warm-up: preparing analysis for ${missing.join(', ')}`);
   }
 
-  // One at a time, to stay gentle on the free-tier limits.
+  // one at a time to stay within the free limits
   for (const symbol of missing) {
     try {
       await getStockAnalysis(symbol);

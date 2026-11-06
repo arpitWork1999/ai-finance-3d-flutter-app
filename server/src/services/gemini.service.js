@@ -16,7 +16,6 @@ This is educational analysis, not financial advice:
 never tell the user to buy or sell.
 `;
 
-/// The exact JSON shape we want back from Gemini.
 const analysisSchema = {
   type: Type.OBJECT,
   properties: {
@@ -47,7 +46,6 @@ const analysisSchema = {
   required: ['trend', 'riskLevel', 'summary', 'keyPoints', 'outlook'],
 };
 
-/// Sends the indicators + recent prices to Gemini and returns its analysis.
 export async function generateStockAnalysis(symbol, indicators, history) {
   const last30Days = history
     .slice(-30)
@@ -68,9 +66,7 @@ Closing prices of the last 30 trading days:
 ${last30Days}
 `;
 
-  // Free-tier models are sometimes busy ("high demand"),
-  // so if one model fails we try the next one in the list.
-  // If all are busy, we wait a few seconds and try the list once more.
+  // free models are often busy, so fall back through the list and retry once
   const maxRounds = 2;
   let lastError;
 
@@ -108,7 +104,7 @@ function wait(milliseconds) {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 }
 
-/// Gemini errors come as a JSON string, we only need the message.
+// errors arrive as a JSON string
 function readableError(error) {
   try {
     return JSON.parse(error.message).error.message;

@@ -2,16 +2,15 @@ import dotenv from 'dotenv';
 
 dotenv.config({ quiet: true });
 
-/// All server settings, read from server/.env
 export const config = {
   port: Number(process.env.PORT) || 3000,
 
-  // Stocks shown in the app. Their analysis is prepared in advance.
+  // analyses for these are prepared in advance
   trackedStocks: ['NVDA', 'MSFT', 'AAPL', 'AMZN', 'TSLA'],
 
   twelveDataApiKey: process.env.TWELVE_DATA_API_KEY,
   geminiApiKey: process.env.GEMINI_API_KEY,
-  // Tried in order: if one model is busy, the next one is used.
+  // tried in order if one is busy
   geminiModels: (
     process.env.GEMINI_MODELS ||
     'gemini-flash-latest,gemini-3.5-flash,gemini-flash-lite-latest'

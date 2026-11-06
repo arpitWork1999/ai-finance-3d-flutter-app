@@ -6,16 +6,13 @@ import 'furniture_shapes.dart';
 import 'app_colors.dart';
 
 class VastuConstants {
-  /// The home is 9 x 9 meters, split into 3 x 3 zones (one room per zone).
   static const double houseSize = 9;
   static const double zoneSize = 3;
 
-  /// Walls are cut low in top view so we can see inside the rooms.
   static const double cutawayWallHeight = 1.0;
   static const double fullWallHeight = 2.6;
   static const double wallThickness = 0.15;
 
-  /// Camera height when walking inside the home.
   static const double eyeHeight = 1.6;
 
   static const List<FurnitureItem> furnitureItems = [

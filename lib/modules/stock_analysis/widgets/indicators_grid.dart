@@ -4,7 +4,6 @@ import '../../../data/models/stock_analysis.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_strings.dart';
 
-/// Shows the numbers the AI used for its analysis.
 class IndicatorsGrid extends StatelessWidget {
   final StockIndicators indicators;
 

@@ -1,7 +1,7 @@
 {
   "name": "ai-finance-server",
   "version": "1.0.0",
-  "description": "Backend for AI stock analysis (Alpha Vantage + Google Gemini)",
+  "description": "Backend for AI stock analysis (Twelve Data + Google Gemini)",
   "type": "module",
   "main": "src/index.js",
   "engines": {

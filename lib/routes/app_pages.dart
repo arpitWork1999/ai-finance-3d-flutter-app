@@ -6,7 +6,6 @@ import '../modules/stock_analysis/stock_analysis_binding.dart';
 import '../modules/stock_analysis/stock_analysis_view.dart';
 import 'app_routes.dart';
 
-/// Connects each route name to its screen and binding.
 class AppPages {
   static final List<GetPage> pages = [
     GetPage(

@@ -1,20 +1,16 @@
-/// Technical indicators calculated from daily history.
-/// We calculate the numbers here (exact math) and let the AI
-/// explain them, so the AI never has to guess numbers.
+// exact maths here, the AI only explains the numbers
 
 function round(value) {
   return Math.round(value * 100) / 100;
 }
 
-/// Simple Moving Average: average close of the last `days` days.
 function simpleMovingAverage(closes, days) {
   if (closes.length < days) return null;
   const lastDays = closes.slice(-days);
   return lastDays.reduce((sum, close) => sum + close, 0) / days;
 }
 
-/// Relative Strength Index (14 days, Wilder's method).
-/// Above 70 = overbought, below 30 = oversold.
+// RSI, Wilder's method. Above 70 overbought, below 30 oversold.
 function relativeStrengthIndex(closes, days = 14) {
   if (closes.length <= days) return null;
 
@@ -42,7 +38,6 @@ function relativeStrengthIndex(closes, days = 14) {
   return 100 - 100 / (1 + relativeStrength);
 }
 
-/// % change between today and `days` trading days ago.
 function percentChange(closes, days) {
   if (closes.length <= days) return null;
   const oldClose = closes[closes.length - 1 - days];
@@ -50,7 +45,6 @@ function percentChange(closes, days) {
   return ((latestClose - oldClose) / oldClose) * 100;
 }
 
-/// Annualized volatility in % (how much the price swings).
 function annualizedVolatility(closes) {
   const dailyReturns = [];
   for (let i = 1; i < closes.length; i++) {

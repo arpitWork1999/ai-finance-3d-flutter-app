@@ -1,13 +1,7 @@
-/// All texts shown in the app, in one place.
-///
-/// Texts with a value inside them are small functions,
-/// e.g. AppStrings.updatedAt('10:30').
 class AppStrings {
-  // ---------------- App ----------------
   static const String appName = 'AI Finance App';
   static const String retry = 'Retry';
 
-  // ---------------- No internet dialog ----------------
   static const String offlineTitle = "You're offline";
   static const String offlineMessage =
       'Your mobile data or Wi-Fi is turned off. Please turn it on to '
@@ -15,11 +9,9 @@ class AppStrings {
   static const String waitingForConnection =
       "Waiting for connection... We'll reload as soon as you're back online.";
 
-  // ---------------- Bottom tabs ----------------
   static const String marketTab = 'Market';
   static const String vastuTab = 'Vastu 3D';
 
-  // ---------------- Market ----------------
   static const String marketTitle = 'Market';
   static const String marketClosed = 'Market closed';
   static const String live = 'Live';
@@ -35,7 +27,6 @@ class AppStrings {
       'API key missing.\nAdd FINNHUB_API_KEY to the .env file.';
   static String updatedAt(String time) => 'Updated $time';
 
-  // ---------------- Stock analysis ----------------
   static const String analysing = 'AI is analysing the last 100 days...';
   static const String last100Days = 'Last 100 trading days';
   static const String aiSummary = 'AI Summary';
@@ -50,7 +41,6 @@ class AppStrings {
       'Historical data: Twelve Data (as of $dataAsOf) · '
       'Analysis: Google Gemini';
 
-  // Indicator names
   static const String average20Days = '20-day avg';
   static const String average50Days = '50-day avg';
   static const String rsi14 = 'RSI (14)';
@@ -61,7 +51,6 @@ class AppStrings {
   static const String high100Days = '100-day high';
   static const String low100Days = '100-day low';
 
-  // ---------------- Errors ----------------
   static const String serverUnreachable =
       'Cannot reach the analysis server.';
   static const String analysisFailed = 'Analysis failed';
@@ -71,7 +60,6 @@ class AppStrings {
   static String noDataFound(String symbol) => 'No data found for $symbol';
   static String requestFailed(int statusCode) => 'Request failed ($statusCode)';
 
-  // ---------------- Vastu ----------------
   static const String vastuTitle = 'Vastu 3D Home';
   static const String resetView = 'Reset view';
   static const String vastuApplied = 'Vastu Applied';
@@ -95,7 +83,6 @@ class AppStrings {
       '$roomName • $zoneName zone';
   static String stepCounter(int step, int total) => '$step/$total';
 
-  // Compass letters
   static const String north = 'N';
   static const String east = 'E';
   static const String south = 'S';

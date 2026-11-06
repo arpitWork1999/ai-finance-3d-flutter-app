@@ -1,13 +1,7 @@
-/// Keeps the server awake on Render's free plan.
-///
-/// Render puts a free server to sleep after 15 minutes without traffic.
-/// When it sleeps, the first request is slow and today's cache is lost.
-/// So the server opens its own /health page every 10 minutes.
-///
-/// Render sets RENDER_EXTERNAL_URL (e.g. https://my-app.onrender.com).
-/// When running locally it is not set, so this job does nothing.
+// Render's free plan sleeps after 15 min idle, so we ping our own /health.
+// RENDER_EXTERNAL_URL isn't set locally, so this does nothing there.
 
-const PING_INTERVAL = 10 * 60 * 1000; // 10 minutes
+const PING_INTERVAL = 10 * 60 * 1000;
 
 export function startKeepAwakeJob() {
   const publicUrl = process.env.RENDER_EXTERNAL_URL;

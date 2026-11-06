@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 import '../vastu_controller.dart';
 
-/// Horizontal list of furniture. Tap one to focus the camera on it.
 class FurnitureList extends GetView<VastuController> {
   const FurnitureList({super.key});
 

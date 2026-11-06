@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../core/constants/app_colors.dart';
 
-/// The 9 zones of a Vastu floor plan (3 x 3 grid).
-///
-/// North is at the top (row 0), East is on the right (column 2).
-///
-///   NW | N | NE
-///   W  | C | E
-///   SW | S | SE
+// North at the top, East on the right:
+//   NW | N | NE
+//   W  | C | E
+//   SW | S | SE
 enum VastuZone {
   northWest(
     'North-West',

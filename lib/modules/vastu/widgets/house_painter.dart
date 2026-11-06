@@ -9,13 +9,6 @@ import '../scene/point_3d.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_strings.dart';
 
-/// Draws the 3D home on a canvas.
-///
-/// Drawing order (the "painter's algorithm"):
-/// 1. Sky, ground and the stone path
-/// 2. Floor of the 9 rooms (always below everything else)
-/// 3. Walls, gate and furniture together, sorted far to near
-/// 4. Name labels on top
 class HousePainter extends CustomPainter {
   final Point3D cameraTarget;
   final double yaw;
@@ -39,7 +32,6 @@ class HousePainter extends CustomPainter {
     required this.selectedItem,
   });
 
-  /// In inside view, labels are shown only for items this close (meters).
   static const double insideLabelDistance = 4;
 
   @override
@@ -66,8 +58,6 @@ class HousePainter extends CustomPainter {
     _drawLabels(canvas, camera);
   }
 
-  // ---------------- Ground and floor ----------------
-
   void _drawGround(Canvas canvas, Camera3D camera) {
     const size = 20.0;
     _drawPolygon(canvas, camera, const [
@@ -91,7 +81,6 @@ class HousePainter extends CustomPainter {
       ];
       _drawPolygon(canvas, camera, tile, Paint()..color = zone.floorColor);
 
-      // Zone name, a little towards the North side of the room.
       final labelPosition = camera.projectPoint(
         Point3D(center.x, 0, center.z - 0.9),
       );
@@ -107,7 +96,6 @@ class HousePainter extends CustomPainter {
     }
   }
 
-  /// N, E, S, W letters just outside the plot (top view only).
   void _drawCompass(Canvas canvas, Camera3D camera) {
     const gap = 0.9;
     const directions = {
@@ -133,8 +121,6 @@ class HousePainter extends CustomPainter {
     });
   }
 
-  // ---------------- Walls and furniture ----------------
-
   void _drawWallsAndFurniture(Canvas canvas, Camera3D camera) {
     final faces = <_ColoredFace>[];
 
@@ -144,8 +130,7 @@ class HousePainter extends CustomPainter {
           ? AppColors.outerWall
           : AppColors.innerWall;
 
-      // A doorway is open. When walls are tall, draw only the beam
-      // above the door (the door frame).
+      // doorway: when the walls are tall, only draw the beam above it
       var bottom = 0.0;
       if (wall.isDoorway) {
         if (wallHeight <= HouseLayout.doorHeight) continue;
@@ -238,15 +223,13 @@ class HousePainter extends CustomPainter {
     }
   }
 
-  /// Makes sides darker than the top, so boxes look 3D.
+  // darker sides so the boxes read as 3D
   Color _shade(Color color, Face3D face) {
     double darkness = 0;
     if (face.normal.x != 0) darkness = 0.12;
     if (face.normal.z != 0) darkness = 0.25;
     return Color.lerp(color, AppColors.black, darkness)!;
   }
-
-  // ---------------- Labels ----------------
 
   void _drawLabels(Canvas canvas, Camera3D camera) {
     for (var index = 0; index < items.length; index++) {
@@ -279,8 +262,6 @@ class HousePainter extends CustomPainter {
     }
   }
 
-  // ---------------- Helpers ----------------
-
   void _drawPolygon(
     Canvas canvas,
     Camera3D camera,
@@ -292,7 +273,6 @@ class HousePainter extends CustomPainter {
     canvas.drawPath(Path()..addPolygon(points, true), paint);
   }
 
-  /// Draws text centered at [position], with an optional rounded background.
   void _drawText(
     Canvas canvas,
     String text,
@@ -333,7 +313,6 @@ class HousePainter extends CustomPainter {
   bool shouldRepaint(covariant HousePainter oldDelegate) => true;
 }
 
-/// A face with its color, ready to be sorted and drawn.
 class _ColoredFace {
   final Face3D face;
   final Color color;

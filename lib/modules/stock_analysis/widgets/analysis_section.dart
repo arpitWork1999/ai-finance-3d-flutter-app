@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// A card with an icon + title, used for each part of the analysis.
 class AnalysisSection extends StatelessWidget {
   final String title;
   final IconData icon;

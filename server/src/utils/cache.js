@@ -1,11 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-/// Very small file cache that keeps data for one day.
-///
-/// Stock data and AI analysis only change once a day, so we save
-/// each response in server/cache/<name>-<date>.json and reuse it.
-/// Files survive server restarts. Files from older days are deleted.
+// data only changes once a day, so each response is saved as <name>-<date>.json
 
 const cacheFolder = path.join(import.meta.dirname, '..', '..', 'cache');
 
@@ -29,7 +25,6 @@ export function writeCache(name, data) {
   deleteOldCacheFiles();
 }
 
-/// Removes files that are not from today, e.g. history-AAPL-2026-11-04.json
 function deleteOldCacheFiles() {
   const todaySuffix = `-${todayDate()}.json`;
 

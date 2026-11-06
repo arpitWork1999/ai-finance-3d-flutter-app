@@ -5,11 +5,9 @@ import '../../data/models/stock_quote.dart';
 import '../../data/services/analysis_api_service.dart';
 import '../../data/services/connectivity_service.dart';
 
-/// Loads the AI analysis of the stock that was tapped on the Market tab.
 class StockAnalysisController extends GetxController {
   final AnalysisApiService _analysisService = AnalysisApiService();
 
-  /// Passed from the Market tab: Get.toNamed(..., arguments: stock)
   final StockQuote stock = Get.arguments as StockQuote;
 
   final Rxn<StockAnalysis> analysis = Rxn<StockAnalysis>();
@@ -18,7 +16,7 @@ class StockAnalysisController extends GetxController {
 
   Worker? _onlineWorker;
 
-  /// Keeps the loader visible a moment so a fast failure doesn't blink.
+  // so a fast failure doesn't make the screen blink
   static const Duration _minLoaderTime = Duration(milliseconds: 800);
 
   @override
@@ -26,7 +24,6 @@ class StockAnalysisController extends GetxController {
     super.onInit();
     loadAnalysis();
 
-    // Back online and the analysis failed to load -> try again.
     _onlineWorker = ever(Get.find<ConnectivityService>().isOnline, (
       bool isOnline,
     ) {

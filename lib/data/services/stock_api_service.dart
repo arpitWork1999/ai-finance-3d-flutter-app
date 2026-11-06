@@ -6,11 +6,9 @@ import '../../core/constants/api_constants.dart';
 import '../models/stock_quote.dart';
 import '../../core/constants/app_strings.dart';
 
-/// REST calls to Finnhub (used for the first load and pull-to-refresh).
 class StockApiService {
   static const Duration _timeout = Duration(seconds: 30);
 
-  /// Gets the latest quote of one stock.
   Future<StockQuote> getQuote(String symbol, String companyName) async {
     final json = await _get('/quote', {'symbol': symbol});
 
@@ -26,14 +24,12 @@ class StockApiService {
     );
   }
 
-  /// Gets quotes of all given stocks at the same time.
   Future<List<StockQuote>> getQuotes(Map<String, String> stocks) {
     return Future.wait(
       stocks.entries.map((stock) => getQuote(stock.key, stock.value)),
     );
   }
 
-  /// Returns true when the US stock market is open right now.
   Future<bool> isMarketOpen() async {
     final json = await _get('/stock/market-status', {'exchange': 'US'});
     return json['isOpen'] == true;

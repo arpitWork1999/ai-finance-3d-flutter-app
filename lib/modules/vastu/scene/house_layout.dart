@@ -5,10 +5,7 @@ import '../../../data/models/vastu_zone.dart';
 import 'point_3d.dart';
 import '../../../core/constants/app_colors.dart';
 
-/// One short piece of the home wall (drawn as a thin box).
-///
-/// A doorway piece is an opening: inside view only draws the
-/// beam above it (the door frame), so we can walk through.
+// doorways only draw the beam above, so you can walk through
 class WallPiece {
   final Point3D base;
   final double width;
@@ -25,7 +22,6 @@ class WallPiece {
   });
 }
 
-/// A simple box with a fixed size and color (gate, compound wall).
 class Block {
   final Point3D base;
   final double width;
@@ -42,32 +38,24 @@ class Block {
   });
 }
 
-/// The plan of the home and its plot.
-///
-/// The home center is (0, 0, 0). North is -z, East is +x.
-/// Each of the 9 Vastu zones is one 3 x 3 m room.
-/// Every inner wall has a door in the middle. The main entrance and the
-/// entry gate are on the North side (a good entrance as per Vastu).
+// house center is (0, 0, 0). North is -z, East is +x.
 class HouseLayout {
   static const double halfSize = VastuConstants.houseSize / 2;
   static const double zoneSize = VastuConstants.zoneSize;
   static const double doorHeight = 2.1;
 
-  /// Walls are split into 1 m pieces. Small pieces sort better when
-  /// drawing far to near, and one piece in the middle becomes a door.
+  // 1 m pieces sort better when drawing far to near,
+  // and the middle one becomes a door
   static const double pieceLength = zoneSize / 3;
 
-  // Plot (compound wall) around the home.
   static const double plotWest = -6.5;
   static const double plotEast = 6.5;
   static const double plotNorth = -8.5;
   static const double plotSouth = 6.5;
   static const double gateHalfWidth = 1.5;
 
-  /// The fountain stands here, in the front garden next to the path.
   static const Point3D frontGardenSpot = Point3D(2.6, 0, -6.2);
 
-  /// Stone path from the street, through the gate, to the main door.
   static const List<Point3D> pathCorners = [
     Point3D(-0.6, 0, -12),
     Point3D(0.6, 0, -12),
@@ -75,12 +63,9 @@ class HouseLayout {
     Point3D(-0.6, 0, -halfSize),
   ];
 
-  /// Center of a zone (room) on the floor.
   static Point3D zoneCenter(VastuZone zone) {
     return Point3D((zone.column - 1) * zoneSize, 0, (zone.row - 1) * zoneSize);
   }
-
-  // ---------------- Home walls ----------------
 
   static final List<WallPiece> wallPieces = _buildWalls();
 
@@ -100,7 +85,6 @@ class HouseLayout {
     return pieces;
   }
 
-  /// Adds one full wall line (3 rooms long) made of 1 m pieces.
   static void _addWall(
     List<WallPiece> pieces, {
     required double line,
@@ -139,8 +123,6 @@ class HouseLayout {
     }
   }
 
-  // ---------------- Compound wall and gate ----------------
-
   static const Color compoundColor = AppColors.compoundWall;
   static const Color gateColor = AppColors.gateDoor;
   static const double compoundHeight = 0.9;
@@ -151,7 +133,6 @@ class HouseLayout {
     ..._buildGate(),
   ];
 
-  /// Low wall around the plot, in 1 m pieces, with a gap for the gate.
   static List<Block> _buildCompoundWall() {
     final blocks = <Block>[];
 
@@ -180,7 +161,6 @@ class HouseLayout {
     );
   }
 
-  /// Two pillars, a beam on top, and two open gate doors.
   static List<Block> _buildGate() {
     const pillarX = gateHalfWidth + 0.1;
     return const [
@@ -207,7 +187,7 @@ class HouseLayout {
         height: 0.25,
         color: AppColors.gateBeam,
       ),
-      // Gate doors, fully open and resting along the compound wall.
+      // gate doors, fully open
       Block(
         base: Point3D(-pillarX - 0.9, 0.1, plotNorth - 0.2),
         width: 1.4,

@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_strings.dart';
 
-/// Shown when Wi-Fi and mobile data are off.
-/// It has no close button: it closes by itself when the internet is back.
 class NoInternetDialog extends StatelessWidget {
   const NoInternetDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // PopScope stops the Android back button from closing the dialog.
+    // stops the Android back button from closing it
     return PopScope(
       canPop: false,
       child: AlertDialog(

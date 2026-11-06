@@ -12,8 +12,7 @@ class DashboardView extends GetView<DashboardController> {
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
-        // IndexedStack keeps both tabs alive, so switching tabs
-        // does not reload the market data.
+        // IndexedStack keeps both tabs alive so switching doesn't reload prices
         body: IndexedStack(
           index: controller.selectedTabIndex.value,
           children: const [MarketView(), VastuView()],

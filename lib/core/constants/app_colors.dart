@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
-/// All colors used in the app, in one place.
 class AppColors {
-  // ---------------- Brand ----------------
-  static const Color primary = Color(0xFF4F46E5); // indigo accent
-  static const Color primaryLight = Color(0xFFE0E7FF); // soft indigo tint
+  static const Color primary = Color(0xFF4F46E5);
+  static const Color primaryLight = Color(0xFFE0E7FF);
   static const Color background = Color(0xFFF5F6FA);
   static const Color white = Colors.white;
   static const Color black = Colors.black;
@@ -13,25 +11,21 @@ class AppColors {
   static const Color border = Color(0xFFE5E7EB);
   static const Color textDark = Color(0xFF1F2937);
 
-  // ---------------- Text ----------------
   static const Color textGrey = Colors.grey;
   static const Color textMedium = Colors.black54;
   static const Color textLight = Colors.black45;
   static const Color textFaint = Colors.black38;
 
-  // ---------------- Status ----------------
   static const Color positive = Colors.green;
   static const Color negative = Colors.red;
   static const Color warning = Colors.orange;
   static const Color neutral = Colors.blueGrey;
   static const Color error = Colors.redAccent;
 
-  // ---------------- Vastu screen ----------------
   static const Color highlight = Color(0xFFF59E0B);
   static const Color labelBackground = Colors.black54;
   static const Color compassNorth = Colors.red;
 
-  // ---------------- 3D scene ----------------
   static const Color sky = Color(0xFFE0F2FE);
   static const Color ground = Color(0xFFD9EAD3);
   static const Color stonePath = Color(0xFFD6D3D1);
@@ -42,7 +36,6 @@ class AppColors {
   static const Color gateBeam = Color(0xFF78716C);
   static const Color gateDoor = Color(0xFF8B5A2B);
 
-  // ---------------- Vastu zone floors ----------------
   static const Color floorNorthWest = Color(0xFFE2E8F0);
   static const Color floorNorth = Color(0xFFE0F2FE);
   static const Color floorNorthEast = Color(0xFFDBEAFE);
@@ -53,7 +46,6 @@ class AppColors {
   static const Color floorSouth = Color(0xFFFEF3C7);
   static const Color floorSouthEast = Color(0xFFFFE4E6);
 
-  // ---------------- Furniture ----------------
   static const Color wood = Color(0xFF92400E);
   static const Color darkWood = Color(0xFF78350F);
   static const Color lightWood = Color(0xFFD97706);
