@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../market_controller.dart';
+import '../../../data/services/connectivity_service.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_strings.dart';
 
-/// Small label in the app bar: "Live", "Connecting" or "Market closed".
+/// Small label in the app bar: "Offline", "Live", "Connecting" or
+/// "Market closed".
 class MarketStatusChip extends GetView<MarketController> {
   const MarketStatusChip({super.key});
 
@@ -18,7 +20,11 @@ class MarketStatusChip extends GetView<MarketController> {
       final String label;
       final Color color;
 
-      if (!controller.isMarketOpen.value) {
+      // No internet -> prices are not live, whatever the market status.
+      if (!Get.find<ConnectivityService>().isOnline.value) {
+        label = AppStrings.offline;
+        color = AppColors.negative;
+      } else if (!controller.isMarketOpen.value) {
         label = AppStrings.marketClosed;
         color = AppColors.textGrey;
       } else if (controller.isLiveConnected.value) {

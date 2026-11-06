@@ -24,6 +24,7 @@ class AppStrings {
   static const String marketClosed = 'Market closed';
   static const String live = 'Live';
   static const String connecting = 'Connecting';
+  static const String offline = 'Offline';
   static const String open = 'Open';
   static const String high = 'High';
   static const String low = 'Low';
@@ -62,8 +63,7 @@ class AppStrings {
 
   // ---------------- Errors ----------------
   static const String serverUnreachable =
-      'Cannot reach the analysis server.\n'
-      'Start it with: cd server && npm start';
+      'Cannot reach the analysis server.';
   static const String analysisFailed = 'Analysis failed';
   static const String invalidApiKey = 'Invalid API key';
   static const String tooManyRequests =

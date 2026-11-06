@@ -38,6 +38,9 @@ class MarketController extends GetxController {
   static const Duration _reconnectDelay = Duration(seconds: 5);
   static const Duration _marketStatusInterval = Duration(minutes: 1);
 
+  /// Keeps the loader visible a moment so a fast failure doesn't blink.
+  static const Duration _minLoaderTime = Duration(milliseconds: 800);
+
   @override
   void onInit() {
     super.onInit();
@@ -47,7 +50,12 @@ class MarketController extends GetxController {
     _onlineWorker = ever(Get.find<ConnectivityService>().isOnline, (
       bool isOnline,
     ) {
-      if (isOnline) loadStocks();
+      if (isOnline) {
+        loadStocks();
+      } else {
+        // Live updates can't arrive while offline.
+        isLiveConnected.value = false;
+      }
     });
     _marketStatusTimer = Timer.periodic(
       _marketStatusInterval,
@@ -74,6 +82,10 @@ class MarketController extends GetxController {
 
     isLoading.value = stocks.isEmpty;
     errorMessage.value = '';
+    // Only wait when the full-screen loader is showing (not on pull-to-refresh).
+    final minLoader = isLoading.value
+        ? Future.delayed(_minLoaderTime)
+        : Future.value();
 
     try {
       final quotes = await _apiService.getQuotes(StockConstants.trackedStocks);
@@ -83,6 +95,7 @@ class MarketController extends GetxController {
     } catch (error) {
       errorMessage.value = error.toString().replaceFirst('Exception: ', '');
     } finally {
+      await minLoader;
       isLoading.value = false;
     }
   }
